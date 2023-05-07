@@ -6,7 +6,7 @@ import './App.css'
 function App() {
     const [row, setRow] = useState([]);
 
-    if (row.length === 0) {
+    const fetchData = () => {
         fetch("http://openapi.seoul.go.kr:8088/5a46486149786f6439305372514a6f/json/RealtimeCityAir/1/25")
             .then(function (res2) {
                 res2.json().then(function (res3) {
@@ -15,9 +15,18 @@ function App() {
             });
     }
 
+    // if (row.length === 0) {
+    //     fetch("http://openapi.seoul.go.kr:8088/5a46486149786f6439305372514a6f/json/RealtimeCityAir/1/25")
+    //         .then(function (res2) {
+    //             res2.json().then(function (res3) {
+    //                 setRow(res3.RealtimeCityAir.row);
+    //             });
+    //         });
+    // }
+
     return (
         <>
-
+            <button onClick={fetchData}>Fetch</button>
             <table>
                 <thead>
                 <th>이름</th>
