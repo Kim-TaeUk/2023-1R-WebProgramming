@@ -1,7 +1,7 @@
 <h1>과제 Quiz (9-2)</h1>
 
 <ol>
-<li>main.jsx의 실제 js 모습은 어떨까? 예상해서 작성해보시오</li>
+<h2><li>main.jsx의 실제 js 모습은 어떨까? 예상해서 작성해보시오</li></h2>
 <ul>
 <li>
 JSX 문법을 사용하여 작성된 React 코드는 browser에서 실행되기 전 bundling 작업을 거치고 JSX -> JS로 변환된다
@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 </li>
 </ul>
-<li>어떻게 하면 그 결과를 얻어올 수 있을까?</li>
+<h2><li>어떻게 하면 그 결과를 얻어올 수 있을까?</li></h2>
 <ul>
 <li>
 React.createElement()함수는 JSX -> JS로 변환한다
