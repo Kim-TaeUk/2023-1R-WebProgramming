@@ -41,6 +41,10 @@ function Worldcup() {
     const [game, setGame] = useState([]);
     const [round, setRound] = useState(0);
     const [nextGame, setNextGame] = useState([]);
+    const [left, setLeft] = useState(false);
+    const [right, setRight] = useState(false);
+    const [left_flex_item, setLeft_flex_item] = useState("flex-item");
+    const [right_flex_item, setRight_flex_item] = useState("flex-item");
 
     useEffect(() => {
         setGame(candidate.map(c => {
@@ -51,6 +55,25 @@ function Worldcup() {
             return l.order - r.order;
         }));
     }, []);
+
+    useEffect(() => {
+        if (left === true) {
+            setRight_flex_item("selected");
+            setTimeout(() => {
+                setLeft(false);
+                setRound(r => r + 1);
+                setRight_flex_item("flex-item");
+            }, 3000);
+        }
+        if (right === true) {
+            setLeft_flex_item("selected");
+            setTimeout(() => {
+                setRight(false);
+                setRound(r => r + 1);
+                setLeft_flex_item("flex-item");
+            }, 3000);
+        }
+    }, [left, right]);
 
     useEffect(() => {
         if (game.length > 1 && round + 1 > game.length / 2) {
@@ -68,7 +91,7 @@ function Worldcup() {
 
     if (game.length === 1) {
         return <div id={"flex-container"}>
-            <div id={"flex-item"}>
+            <div className={"flex-item"}>
                 <p className={"worldCup-info"}>이상형 월드컵 우승</p>
                 <img src={game[0].src} alt={game[0].name}/>
                 <p className={"pkm-name"}> {game[0].name}</p>
@@ -85,19 +108,19 @@ function Worldcup() {
             {game.length === 2 ? "결승" : game.length + "강"}
         </div>
         <div id={"flex-container"}>
-            <div id={"flex-item"}>
+            <div className={left_flex_item}>
                 <img src={game[round * 2].src} alt={game[round * 2].name}
                      onClick={() => {
                          setNextGame((prev) => prev.concat(game[round * 2]));
-                         setRound(r => r + 1);
+                         setLeft(true);
                      }}/>
                 <p className={"pkm-name"}>{game[round * 2].name}</p>
             </div>
-            <div id={"flex-item"}>
+            <div className={right_flex_item}>
                 <img src={game[round * 2 + 1].src} alt={game[round * 2 + 1].name}
                      onClick={() => {
                          setNextGame((prev) => prev.concat(game[round * 2 + 1]));
-                         setRound(r => r + 1);
+                         setRight(true);
                      }}/>
                 <p className={"pkm-name"}>{game[round * 2 + 1].name}</p>
             </div>

@@ -1,5 +1,5 @@
 *:not(.pkm-name) {
-    background-color:beige;
+    background-color: beige;
 }
 
 #flex-container {
@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-#flex-item {
+.flex-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,4 +38,8 @@ img {
     z-index: 100;
     margin: 0 0 -45px 0;
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.selected {
+    display: none;
 }
