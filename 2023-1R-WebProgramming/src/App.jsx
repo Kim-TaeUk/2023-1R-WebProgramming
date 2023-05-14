@@ -1,21 +1,36 @@
-import {useState} from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import {useEffect, useState} from 'react'
 import './App.css'
 
 function App() {
     const [row, setRow] = useState([]);
 
+    // useEffect(() => {
+    //     console.log("mount or update");
+    //
+    //     return () => {
+    //         console.log("unmount");
+    //     }
+    // });
+    //
+    // useEffect(() => {
+    //     console.log("mount only");
+    // }, []);
+    //
+    // useEffect(() => {
+    //     console.log("update only");
+    // }, [row]);
+
+    // useEffect(() => {
+    //     fetchData()
+    // }, []);
+
     const fetchData = () => {
         fetch("http://openapi.seoul.go.kr:8088/5a46486149786f6439305372514a6f/json/RealtimeCityAir/1/25")
-            .then(function (res2) {
-                res2.json().then(function (res3) {
-                    setRow(res3.RealtimeCityAir.row);
-                });
-            });
+            .then((res) => res.json())
+            .then((res) => setRow(res.RealtimeCityAir.row));
     }
 
-    // if (row.length === 0) {
+    // const fetchData = () => {
     //     fetch("http://openapi.seoul.go.kr:8088/5a46486149786f6439305372514a6f/json/RealtimeCityAir/1/25")
     //         .then(function (res2) {
     //             res2.json().then(function (res3) {
@@ -24,24 +39,27 @@ function App() {
     //         });
     // }
 
+
     return (
         <>
             <button onClick={fetchData}>Fetch</button>
             <table>
                 <thead>
-                <th>이름</th>
-                <th>PM10</th>
-                <th>03</th>
-                <th>상태</th>
+                <tr>
+                    <th>이름</th>
+                    <th>PM10</th>
+                    <th>03</th>
+                    <th>상태</th>
+                </tr>
                 </thead>
                 <tbody>
                 {
-                    row.map(function (obj) {
-                        return <tr>
-                            <td>{obj.MSRSTE_NM}</td>
-                            <td>{obj.PM10}</td>
-                            <td>{obj.O3}</td>
-                            <td>{obj.IDEX_NM}</td>
+                    row.map((district, idx) => {
+                        return <tr key={idx}>
+                            <td>{district.MSRSTE_NM}</td>
+                            <td>{district.PM10}</td>
+                            <td>{district.O3}</td>
+                            <td>{district.IDEX_NM}</td>
                         </tr>
                     })
                 }
