@@ -1,0 +1,41 @@
+*:not(.pkm-name) {
+    background-color:beige;
+}
+
+#flex-container {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+}
+
+#flex-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 600px;
+    height: 600px;
+    object-fit: cover;
+}
+
+.pkm-name {
+    font-size: 100px;
+    color: white;
+    width: 600px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: -150px 0 0 0;
+}
+
+.worldCup-info {
+    position: relative;
+    font-size: 30px;
+    color: white;
+    z-index: 100;
+    margin: 0 0 -45px 0;
+    background-color: rgba(0, 0, 0, 0.1);
+}
