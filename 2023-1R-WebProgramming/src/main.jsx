@@ -11,7 +11,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     // React.StrictMode는 React에서 없엘 기능들을 사용하면 알려주는 component임
     // <App />에 보여주고 싶은 component를 입력하면 됨
 )
-
 // 과제 Quiz (9-2)
 // JSX 문법을 사용하여 작성된 React 코드는 browser에서 실행되기 전 bundling 작업을 거치고 JSX -> JS로 변환된다
 // 이때 bundling 작업을 해주는 것이 bundler(Vite)이다 -> Vite는 bundling 작업을 위해 필요한 파일을 미리 불러온다
