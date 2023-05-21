@@ -36,12 +36,17 @@ img {
     margin: 0;
     color: black;
     width: 600px;
+    height: 80px;
+}
 
+.count-info {
+    margin: 4px 0 12px 0;
 }
 
 .statistics {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .worldCup-info {
@@ -51,6 +56,27 @@ img {
     z-index: 100;
     margin: 0 0 -45px 0;
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.statistics-info {
+    display: flex;
+    /*flex-direction: row;*/
+}
+
+.statistics-each {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+}
+
+.statistics-pkm-name {
+    width: 100px;
+}
+
+progress {
+    width: 300px;
+    height: 20px;
+    margin: auto;
 }
 
 .selected {

@@ -86,7 +86,7 @@ function Worldcup() {
                 setLeft(false);
                 setRound(r => r + 1);
                 setRight_flex_item("flex-item");
-            }, 3000);
+            }, 30);
         }
         if (right === true) {
             setLeft_flex_item("selected");
@@ -94,7 +94,7 @@ function Worldcup() {
                 setRight(false);
                 setRound(r => r + 1);
                 setLeft_flex_item("flex-item");
-            }, 3000);
+            }, 30);
         }
     }, [left, right]);
 
@@ -123,15 +123,16 @@ function Worldcup() {
 
             <div className={"statistics"}>
                 <p className={"winner-info"}>{game[0].name} {stat[game[0].name]}번 승리!</p>
-                <p className={"count-info"}>전체 승리 횟빼</p>
-                <table>
-                    {Object.keys(stat).map(name => {
-                        return <tr key={name}>
-                            <td>{name}</td>
-                            <td>{stat[name]}</td>
-                        </tr>
-                    })}
-                </table>
+                <p className={"count-info"}>전체 승률(승리 횟수 / 전체 1:1 대결수)</p>
+                {Object.keys(stat).map(name => {
+                    const all = stat["구구"] + stat["꼬링크"] + stat["꼬부기"] + stat["누오"] + stat["도치마론"] + stat["디그다"] + stat["따라큐"] + stat["뚜꾸리"] + stat["리자몽"] + stat["먹고자"] + stat["메타몽"] + stat["뮤"] + stat["빠모"] + stat["삐"] + stat["삐삐"] + stat["피츄"];
+                    return <div className={"statistics-info"}>
+                        <div className={"statistics-each"} key={name}>
+                            <div className={"statistics-pkm-name"}>{name}</div>
+                            <progress value={stat[name]} max={all}></progress>
+                        </div>
+                    </div>
+                })}
             </div>
         </div>;
     }
