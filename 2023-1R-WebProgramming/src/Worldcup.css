@@ -31,6 +31,19 @@ img {
     margin: -150px 0 0 0;
 }
 
+.winner-info {
+    font-size: 60px;
+    margin: 0;
+    color: black;
+    width: 600px;
+
+}
+
+.statistics {
+    display: flex;
+    flex-direction: column;
+}
+
 .worldCup-info {
     position: relative;
     font-size: 30px;

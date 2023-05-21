@@ -45,8 +45,31 @@ function Worldcup() {
     const [right, setRight] = useState(false);
     const [left_flex_item, setLeft_flex_item] = useState("flex-item");
     const [right_flex_item, setRight_flex_item] = useState("flex-item");
+    const [stat, setStat] = useState({
+        "구구": 0,
+        "꼬링크": 0,
+        "꼬부기": 0,
+        "누오": 0,
+        "도치마론": 0,
+        "디그다": 0,
+        "따라큐": 0,
+        "뚜꾸리": 0,
+        "리자몽": 0,
+        "먹고자": 0,
+        "메타몽": 0,
+        "뮤": 0,
+        "빠모": 0,
+        "삐": 0,
+        "삐삐": 0,
+        "피츄": 0
+    });
 
     useEffect(() => {
+        const str = localStorage.getItem("2018112034");
+        if (str != null) {
+            setStat(JSON.parse(str));
+        }
+
         setGame(candidate.map(c => {
             return {
                 name: c.name, src: c.src, order: Math.random()
@@ -90,11 +113,25 @@ function Worldcup() {
     }, [round]);
 
     if (game.length === 1) {
+        localStorage.setItem("2018112034", JSON.stringify(stat));
         return <div id={"flex-container"}>
             <div className={"flex-item"}>
                 <p className={"worldCup-info"}>이상형 월드컵 우승</p>
                 <img src={game[0].src} alt={game[0].name}/>
                 <p className={"pkm-name"}> {game[0].name}</p>
+            </div>
+
+            <div className={"statistics"}>
+                <p className={"winner-info"}>{game[0].name} {stat[game[0].name]}번 승리!</p>
+                <p className={"count-info"}>전체 승리 횟빼</p>
+                <table>
+                    {Object.keys(stat).map(name => {
+                        return <tr key={name}>
+                            <td>{name}</td>
+                            <td>{stat[name]}</td>
+                        </tr>
+                    })}
+                </table>
             </div>
         </div>;
     }
@@ -103,26 +140,49 @@ function Worldcup() {
         return <p>Loading</p>;
     }
 
+    const leftIndex = round * 2;
+    const rightIndex = round * 2 + 1;
+
+    const leftFunction = () => {
+        setStat({
+            ...stat,
+            [game[leftIndex].name]: stat[game[leftIndex].name] + 1
+        });
+        // setStat((prevStat) => {
+        //     prevStat[game[leftIndex].name] = prevStat[game[leftIndex].name] + 1;
+        //     return prevStat;
+        // });
+        setNextGame((prev) => prev.concat(game[leftIndex]));
+        setLeft(true);
+    };
+    const rightFunction = () => {
+        setStat({
+            ...stat,
+            [game[rightIndex].name]: stat[game[rightIndex].name] + 1
+        });
+        // setStat((prevStat) => {
+        //     prevStat[game[rightIndex].name] = prevStat[game[rightIndex].name] + 1;
+        //     return prevStat;
+        // });
+        setNextGame((prev) => prev.concat(game[rightIndex]));
+        setRight(true);
+    };
+
+    // console.log(stat);
     return <div>
         <div className={"worldCup-info"}>이상형 월드컵 {round + 1} / {game.length / 2}&nbsp;&nbsp;
             {game.length === 2 ? "결승" : game.length + "강"}
         </div>
         <div id={"flex-container"}>
             <div className={left_flex_item}>
-                <img src={game[round * 2].src} alt={game[round * 2].name}
-                     onClick={() => {
-                         setNextGame((prev) => prev.concat(game[round * 2]));
-                         setLeft(true);
-                     }}/>
-                <p className={"pkm-name"}>{game[round * 2].name}</p>
+                <img src={game[leftIndex].src} alt={game[leftIndex].name}
+                     onClick={leftFunction}/>
+                <p className={"pkm-name"}>{game[leftIndex].name}</p>
             </div>
             <div className={right_flex_item}>
-                <img src={game[round * 2 + 1].src} alt={game[round * 2 + 1].name}
-                     onClick={() => {
-                         setNextGame((prev) => prev.concat(game[round * 2 + 1]));
-                         setRight(true);
-                     }}/>
-                <p className={"pkm-name"}>{game[round * 2 + 1].name}</p>
+                <img src={game[rightIndex].src} alt={game[rightIndex].name}
+                     onClick={rightFunction}/>
+                <p className={"pkm-name"}>{game[rightIndex].name}</p>
             </div>
         </div>
     </div>;
